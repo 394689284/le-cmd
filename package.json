@@ -1,0 +1,33 @@
+{
+  "name": "le-cmd",
+  "version": "1.0.1",
+  "author": "maskMan",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "lz": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/394689284/npm-utils.git"
+  },
+  "homepage": "https://github.com/394689284/npm-utils#readme",
+  "directories": {},
+  "files": [
+    "bin",
+    "lib",
+    "README.md",
+    "jsconfig.json"
+  ],
+  "keywords": [],
+  "license": "ISC",
+  "engines": {
+    "node": ">= 8"
+  },
+  "dependencies": {
+    "copy-dir": "^1.3.0"
+  }
+}
