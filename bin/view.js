@@ -1,9 +1,9 @@
 /*
  * @Author: maskMan
- * @LastEditTime: 2023-04-23 19:24:16
+ * @LastEditTime: 2023-04-24 08:01:58
  * @Descripttion:获取资源配置描述
  */
-const { readResRecord, readReslist, fileCopy, linkCmdExe } = require('./file')
+const { readResRecord, readReslist, fileCopy, linkCmdExe, delCmdExe } = require('./file')
 /**
  * @description: 查看指定路径下资源包列表
  * @param {string} dir 路径名
@@ -41,9 +41,13 @@ function copyFile(resName) {
 function linkToCmd(resName) {
   return linkCmdExe(resName)
 }
+function delToCmd(resName) {
+  return delCmdExe(resName)
+}
 module.exports = {
   viewResSingle,
   viewResList,
   copyFile,
   linkToCmd,
+  delToCmd,
 }

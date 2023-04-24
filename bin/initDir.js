@@ -1,12 +1,12 @@
 /*
  * @Author: maskMan
- * @LastEditTime: 2023-04-23 19:13:11
+ * @LastEditTime: 2023-04-24 10:25:07
  * @Descripttion:初始化获取目录
  */
 const fs = require('fs')
 const path = require('path')
 const basePath = path.join(__dirname, '../node_modules')
-const confName = 'res.config.js'
+const confName = 'package.json'
 resCount = 1
 /**
  * @description: 获取全部路径初始启动

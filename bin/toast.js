@@ -15,18 +15,20 @@ const helpText = (function () {
   helpText.push(`${icons}${space}link --[resName]  链接新的资源包`)
   helpText.push(`${icons}${space}build --[resName] 创新资源链接到当前目录`)
   helpText.push(`${icons}${space}copy --[resName]  拷贝资源包到当前目录`)
+  helpText.push(`${icons}${space}del --[resName]  删除当前目录资源包的全部链接`)
   return helpText
 })()
 //资源描述
-const resDesc = { author: '作者', description: '描述' }
+const resDesc = { author: 'author', description: 'desc', version: 'ver', readmeFilename: 'readme' }
 /**  错误信息 */
 const errMsg = `${icons}${spaceSmall}执行出错!输入 lecmd -h 帮助`
 const resErrMsg = `${icons}${spaceSmall}资源不存在!输入 lzcmd -h 帮助`
 const curVer = `${icons}${spaceSmall}当前版本 v${version} `
-const copySucMsg = `${icons}${spaceSmall}正在拷贝...`
-const copyFailMsg = `${icons}${spaceSmall}拷贝失败`
-const linkMsg = `${icons}${spaceSmall}link 正在链接...`
-const buildMsg = `${icons}${spaceSmall}build 资源创建中...`
+const copySucMsg = `${icons}${spaceSmall}资源拷贝成功`
+const copyFailMsg = `${icons}${spaceSmall}资源拷贝失败`
+const linkMsg = `${icons}${spaceSmall}link 资源链接成功`
+const buildMsg = `${icons}${spaceSmall}build 资源创建成功`
+const delMsg = `${icons}${spaceSmall}del 资源删除成功`
 const linkErrMsg = `${icons}${spaceSmall}link 链接失败`
 const avgErrMsg = `${icons}${spaceSmall}参数不正确 输入 lecmd -h 帮助`
 const noConfErrMsg = '未找到res配置'
@@ -49,4 +51,5 @@ module.exports = {
   copySucMsg,
   copyFailMsg,
   buildMsg,
+  delMsg,
 }

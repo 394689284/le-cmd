@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /*
  * @Author: maskMan
- * @LastEditTime: 2023-04-23 20:48:15
+ * @LastEditTime: 2023-04-24 11:28:36
  * @Descripttion: lz命令入口
  */
-const cmdList = ['-v', '-h', 'list', 'link', 'copy', 'build']
-const { errMsg, resErrMsg, linkMsg, linkErrMsg, copySucMsg, copyFailMsg, avgErrMsg, curVer, helpShow, buildMsg } = require('./toast')
-const { viewResSingle, viewResList, copyFile, linkToCmd } = require('./view')
+const cmdList = ['-v', '-h', 'list', 'link', 'copy', 'build', 'del']
+const { errMsg, resErrMsg, linkMsg, linkErrMsg, copySucMsg, copyFailMsg, avgErrMsg, curVer, helpShow, buildMsg, delMsg } = require('./toast')
+const { viewResSingle, viewResList, copyFile, linkToCmd, delToCmd } = require('./view')
 /**
  * @description: 显示资源列表
  * @param {string} cmd 命令
@@ -52,7 +52,6 @@ function showHelpCmd(cmd) {
  * @return {boolean} 是否中
  */
 function showLinkCmd(cmd, resName) {
-  console.log('🚀  resName', resName)
   if (cmd == 'link' && resName) {
     try {
       linkToCmd(resName)
@@ -63,6 +62,28 @@ function showLinkCmd(cmd, resName) {
     return true
   } else if (cmd == 'link' && !resName) {
     console.log(avgErrMsg)
+    return true
+  }
+  return false
+}
+/**
+ * @description:显示链接link命令
+ * @param {string} cmd 命令
+ * @param {string} resName 资源名
+ * @return {boolean} 是否中
+ */
+function showDelCmd(cmd, resName) {
+  if (cmd == 'del' && resName) {
+    try {
+      delToCmd(resName)
+      console.log(delMsg)
+    } catch (error) {
+      console.log(avgErrMsg, error)
+    }
+    return true
+  } else if (cmd == 'del' && !resName) {
+    delToCmd()
+    console.log(delMsg)
     return true
   }
   return false
@@ -106,7 +127,6 @@ function checkCmd() {
     resName: resName ? resName.replace('--', '') : null,
   }
 }
-
 ;(async function main() {
   const { cmd, isSignle, resName } = checkCmd()
   if (cmd) {
@@ -116,6 +136,9 @@ function checkCmd() {
     if (cmd === 'build') {
       linkToCmd(false)
       console.log(buildMsg)
+      return
+    }
+    if (showDelCmd(cmd, resName)) {
       return
     }
     if (showLinkCmd(cmd, resName)) {

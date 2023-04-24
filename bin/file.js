@@ -1,6 +1,6 @@
 /*
  * @Author: maskMan
- * @LastEditTime: 2023-04-23 20:34:15
+ * @LastEditTime: 2023-04-24 11:30:20
  * @Descripttion:读取资源包文件
  */
 const fs = require('fs')
@@ -22,8 +22,10 @@ function _readConf(resName) {
     if (!dir) {
       return { conf: null, name: resName, noFind: true, err: resErrMsg }
     }
+
     if (fs.existsSync(dirPath)) {
-      return { conf: require(dirPath), name: resName, noFind: false, err: null }
+      const { author, version, description, readmeFilename } = require(dirPath)
+      return { conf: { author, version, description, readmeFilename: `${dir}/${readmeFilename}` }, name: resName, noFind: false, err: null }
     } else {
       return { conf: null, name: resName, noFind: false, err: noConfErrMsg }
     }
@@ -39,24 +41,25 @@ function _readConf(resName) {
 function _resoveConf(record) {
   let { conf, name, noFind, err } = record
   if (noFind) {
-    return `${icons}${space}资源 --${name}${space}${err}`
+    return `${icons}${space}res --${name}${space}${err}`
   }
-  const text = [`${icons}${space}资源[${resCount}] copy --${name}${space}`]
+  const text = [`${icons}${space}res[${resCount}]${spaceSmall}${name}${space}lz copy --${name}${space}`]
   if (conf) {
     for (const key in conf) {
       if (key != 'name') {
-        text.push(`${resDesc[key]}-${conf[key]}`)
+        text.push(`${resDesc[key]}:${conf[key]}`)
       }
     }
     resCount++
-    return text.join(spaceSmall)
+    const ret = text.join(',')
+    return ret.replace(',author', 'author')
   }
   text.push(err)
   resCount++
   return text.join(' ')
 }
 /**
- * @description:执行命令
+ * @description:执行链接命令
  * @return {}
  */
 function linkCmdExe(resName) {
@@ -64,12 +67,28 @@ function linkCmdExe(resName) {
   if (resName) {
     currList.push(resName)
   }
-  console.log('🚀  currList', currList)
   currList = Array.from(new Set(currList))
   const cmd = currList.join(' ')
-  console.log('🚀  cmd', cmd)
   var cmdPath = resName ? process.argv[1].replace(/cli\.js$/, '') : process.cwd()
   nodeCmd.exec(cmd, { cwd: cmdPath })
+  return true
+}
+/**
+ * @description:执行删除链接
+ * @return {}
+ */
+function delCmdExe(resName) {
+  let cmd = null
+  if (resName) {
+    cmd = `npm unlink ${resName}`
+    nodeCmd.exec(cmd, { cwd: cmdPath })
+  } else if (dirList.length) {
+    let currList = ['npm unlink', ...dirList]
+    cmd = currList.join(' ')
+    var cmdPath = process.cwd()
+    nodeCmd.exec(cmd, { cwd: cmdPath })
+  }
+  return true
 }
 /**
  * @description: 获取资源包配置描述
@@ -102,13 +121,11 @@ function readReslist() {
  * @return {*}
  */
 function fileCopy(fileName) {
-  console.log('🚀  fileName', fileName)
   try {
     const file = `${basePath}/${fileName}`
     if (!fs.existsSync(file)) {
       return 0
     }
-    console.log('🚀  file', file)
     const tpath = fileName.indexOf('/') >= 0 ? `${process.cwd()}${fileName.substring(fileName.lastIndexOf('/'))}` : `${process.cwd()}/${fileName}`
     copydir(file, tpath, {
       utimes: true,
@@ -124,4 +141,5 @@ module.exports = {
   readReslist,
   fileCopy,
   linkCmdExe,
+  delCmdExe,
 }
