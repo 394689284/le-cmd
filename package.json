@@ -12,9 +12,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/394689284/npm-utils.git"
+    "url": "git+https://github.com/394689284/le-cmd"
   },
-  "homepage": "https://github.com/394689284/npm-utils#readme",
+  "homepage": "https://github.com/394689284/le-cmd#readme",
   "directories": {},
   "files": [
     "bin",
