@@ -33,13 +33,13 @@
 
 #### 用法
 
-1 全局安装 npm i le-cmd -g 运行 npm link
-2 创建好自己的模板资源
-3 模板资源目录下运行 npm link 在运行 lz link --模板名字 上传到模板库
-4 项目目录下 运行 lz build 拉取资源库到 node_modules 路径下
-5 任意目录下 运行 lz copy --模板名字 拷贝模板到当前目录
-6 运行 lz del --模板名字 删除项目下的模板库 实际模板资源不会删除
+1. 全局安装 npm i le-cmd -g 运行 npm link
+2. 创建好自己的模板资源
+3. 模板资源目录下运行 npm link 在运行 lz link --模板名字 上传到模板库
+4. 项目目录下 运行 lz build 拉取资源库到 node_modules 路径下
+5. 任意目录下 运行 lz copy --模板名字 拷贝模板到当前目录
+6. 运行 lz del --模板名字 删除项目下的模板库 实际模板资源不会删除
 
 安装 Search node_modules 插件 可快速搜索模板资源
 
-##### Git [仓库地址](git@github.com:394689284/le-cmd.git)
+##### Git [仓库地址](https://github.com/394689284/le-cmd)
